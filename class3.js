@@ -81,3 +81,87 @@ console.log(person.address.home?.number?.prefix)//undefined
 console.log(person.address?.home?.number ?? 0) //0
 console.log(person.address?.home?.continent ??  "Not specified") //Not specified
 console.log(person.gender?.type ?? "N/A") //N/A
+
+
+//Array/Iterable functions
+//forEach, Map, Filter, reduce
+
+arr.forEach(
+    (value,index) => {
+        console.log(index, value)
+    }
+)
+
+//callback can take 3 args:value, index, array
+arr.forEach(elem => console.log(elem *2))
+//foreach doesnot return anything
+
+const mappedArr =arr.map(value => value *3)
+console.log(mappedArr)
+const mappedArr2 =arr.map((value, index)=>{
+    return value +index
+
+})
+console.log(mappedArr2) //map returns new array / with same size/length
+
+
+
+const names = ["sarjak", "anjali", "anisha"]
+const components =names.map(
+    name =>`<li>${name}</li>`
+)
+
+console.log(components)
+
+
+const filteredArr =arr.filter(value => value >10)
+console.log(filteredArr)// filter returns new array with size <=original array
+
+
+const reducedVal =arr.reduce(
+    (accumulator, currentValue) => accumulator +currentValue,
+    0 //2nd args inital value of accumulator
+)
+
+console.log(reducedVal) //reduce returns single aggregated value
+
+
+
+// const cart =[
+// {name:"milk", category:"grocery", price:2.5, qty:2, inStock:false},
+// {name:"shampoo", category:"beauty", price:1.8, qty:3, inStock:true},
+// {name:"Egg", category:"grocery", price:5.0, qty:1, inStock:true},
+// ];
+
+//use filter to keep only in-stock grocery items.
+//use map to transform each kept item into {name, qty, lineTotal}
+//where lineTotal  = Price * qty
+//use reduce to compute the grandtotal cost of the kept time
+
+
+const cart =[
+{name:"milk", category:"grocery", price:2.5, qty:2, inStock:false},
+{name:"shampoo", category:"beauty", price:1.8, qty:3, inStock:true},
+{name:"Egg", category:"grocery", price:5.0, qty:1, inStock:true},
+];
+
+
+const filteredCart =cart.filter(item => item.inStock && item.categories ==="grocery")
+const mappedcart =filteredCart.map(
+    item => {
+        {
+            name:item.name;
+            qty:item.qty;
+            lineTotal:item.price * item.qty;
+        }
+    }
+)
+
+const grandTotal =mappedcart.reduce(
+    (acc, item) => acc + item.lineTotal,
+    0
+
+)
+
+console.log("Grand Total: ", grandTotal)
+
